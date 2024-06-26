@@ -53,8 +53,8 @@ $level = "pemohon";
                         <li class="scroll"><a href="#home">Beranda</a></li>
                         <li class="scroll"><a href="#features">Jadwal</a></li>
                         <li class="scroll"><a href="#services">Informasi</a></li>
-                        <li class="scroll"><a href="login_admin.php">Pegawai</a></li>
                         <li class="scroll"><a href="#get-in-touch">Lokasi</a></li>
+                        <li class="scroll"><a href="login_admin.php">Masuk Pegawai</a></li>
                     </ul>
                 </div>
             </div>

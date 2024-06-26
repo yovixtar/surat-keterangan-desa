@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="main/vendors/base/vendor.bundle.base.css">
   <link href="main/css/sweetalert.css" rel="stylesheet" type="text/css">
   <!-- <script src="main/js/jquery-2.1.3.min.js"></script> -->
-  <script src="main/js/sweetalert.min.js"></script>   
+  <script src="main/js/sweetalert.min.js"></script>
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="main/css/style.css">
   <style>
     .form-control {
-      color: black !important; 
+      color: black !important;
     }
   </style>
 </head>
@@ -33,7 +33,7 @@
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left py-5 px-4 px-sm-5">
               <div class="brand-logo text-center">
-                <img src="main/img/p.png" width="5"  alt="logo">
+                <img src="main/img/p.png" width="5" alt="logo">
               </div>
               <h4 class="text-center">LOGIN PEGAWAI</h4>
               <h6 class="font-weight-light"></h6>
@@ -55,10 +55,10 @@
                   </button>
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
-                  
+
                 </div>
                 <div class="mb-2">
-                  <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" href="http://localhost/surat-keterangan-desa_/">BATAL</a>
+                  <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" href="/">KEMBALI KE HALAMAN UTAMA</a>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Belum memiliki akun? <a href="admin.php" class="text-primary">Buat</a>
@@ -76,58 +76,82 @@
 
   <!-- login -->
   <?php
-    if(isset($_POST['login'])){
-        $hak_akses = $_POST['hak_akses'];
-        $password = $_POST['password'];
-            
-        // metode enkripsi
-        $ciphering = "AES-128-CTR";
+  if (isset($_POST['login'])) {
+    $hak_akses = $_POST['hak_akses'];
+    $password = $_POST['password'];
 
-        // gunakan metode enkripsi menggunakan openssl
-        $iv_length = openssl_cipher_iv_length($ciphering);
-        $options = 0;
-          
-        // olah data not-null
-        $encryption_iv = '1234567891011121';
-          
-        // kunci enkripsi
-        $kunci = "surat123";
-          
-        // Use openssl_encrypt() function to encrypt the data
-        $password_enkripsi = openssl_encrypt($password, $ciphering,
-                      $kunci, $options, $encryption_iv);
+    // metode enkripsi
+    $ciphering = "AES-128-CTR";
 
-        $sql_pass = "SELECT * FROM data_user WHERE hak_akses='$hak_akses' AND password='$password_enkripsi'";
-        $query = mysqli_query($konek,$sql_pass);
-        $data_login = mysqli_fetch_assoc($query);
-        $pass = $data_login['password'];
-        $jumlah_login = mysqli_num_rows($query);
+    // gunakan metode enkripsi menggunakan openssl
+    $iv_length = openssl_cipher_iv_length($ciphering);
+    $options = 0;
 
-        // metode enkripsi
-        $ciphering = "AES-128-CTR";    
+    // olah data not-null
+    $encryption_iv = '1234567891011121';
 
-        // Non-NULL Initialization Vector for decryption
-        $decryption_iv = '1234567891011121';
-        $options = 0;  
+    // kunci enkripsi
+    $kunci = "surat123";
 
-        // Use openssl_decrypt() function to decrypt the data
-        $deskripsi_password=openssl_decrypt ($pass, $ciphering, 
-        $kunci, $options, $decryption_iv);
-         
-            
-        if ($jumlah_login > 0 && $password == $deskripsi_password) {
-            session_start();
-              $_SESSION['hak_akses']=$data_login['hak_akses'];
-              $_SESSION['password']=$data_login['password'];
-            echo "<script language='javascript'>swal('Selamat...', 'Login Berhasil!', 'success');</script>" ;
-             echo '<meta http-equiv="refresh" content="3; url=demo1/main2.php">';
-        } else {
-          echo "<script language='javascript'>swal('Gagal...', 'Login Gagal', 'error');</script>" ;
-           echo '<meta http-equiv="refresh" content="3; url=login_admin.php">';
-        }
-          
-      
+    // Use openssl_encrypt() function to encrypt the data
+    $password_enkripsi = openssl_encrypt(
+      $password,
+      $ciphering,
+      $kunci,
+      $options,
+      $encryption_iv
+    );
+
+    $sql_pass = "SELECT * FROM data_user WHERE hak_akses='$hak_akses' AND password='$password_enkripsi'";
+    $query = mysqli_query($konek, $sql_pass);
+    $data_login = mysqli_fetch_assoc($query);
+    $pass = $data_login['password'];
+    $jumlah_login = mysqli_num_rows($query);
+
+    // metode enkripsi
+    $ciphering = "AES-128-CTR";
+
+    // Non-NULL Initialization Vector for decryption
+    $decryption_iv = '1234567891011121';
+    $options = 0;
+
+    // Use openssl_decrypt() function to decrypt the data
+    $deskripsi_password = openssl_decrypt(
+      $pass,
+      $ciphering,
+      $kunci,
+      $options,
+      $decryption_iv
+    );
+
+
+    if ($jumlah_login > 0 && $password == $deskripsi_password) {
+      session_start();
+      $_SESSION['hak_akses'] = $data_login['hak_akses'];
+      $_SESSION['password'] = $data_login['password'];
+      echo "<script language='javascript'>
+                  swal({
+                      title: 'Selamat...',
+                      text: 'Login Berhasil!',
+                      icon: 'success',
+                      buttons: false,
+                      timer: 3000
+                  });
+                </script>";
+      echo '<meta http-equiv="refresh" content="3; url=demo1/main2.php">';
+    } else {
+      echo "<script language='javascript'>
+                  swal({
+                      title: 'Gagal...',
+                      text: 'Login Gagal',
+                      icon: 'error',
+                      buttons: false,
+                      timer: 3000
+                  });
+                </script>";
+      echo '<meta http-equiv="refresh" content="3; url=login_admin.php">';
     }
+  }
   ?>
 
   <!-- plugins:js -->
@@ -139,7 +163,7 @@
   <script src="main/js/template.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <!-- endinject -->
-  <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script> 
+  <script src="http://code.jquery.com/jquery-3.0.0.min.js"></script>
 </body>
 
 </html>

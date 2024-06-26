@@ -72,7 +72,7 @@
 						<div class="col-md-3 pr-md-0">
 								<div class="card-pricing2 card-warning">
 									<div class="pricing-header">
-										<h6 class="fw-bold text-center text-uppercase">Surat Keterangan Lainnya</h6>
+										<h6 class="fw-bold text-center text-uppercase">Surat Ketarangan / Pengantar</h6>
 									</div>
 									<div class="price-value">
 										<div class="value">

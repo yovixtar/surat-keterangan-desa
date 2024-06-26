@@ -66,7 +66,7 @@
                   </button>
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" href="http://localhost/surat-keterangan-desa_/">BATAL</a>
+                  <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" href="/">KEMBALI KE HALAMAN UTAMA</a>
                 </div>
                 <div class="text-center mt-4 font-weight-light">
                   Sudah memiliki akun? <a href="login_admin.php" class="text-primary">Login</a>
