@@ -1,18 +1,24 @@
-<?php include '../konek.php';?>
+<?php include '../konek.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>Dashboard Pelayanan Surat Keterangan Online Kelurahan Wergu Wetan</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon"/>
+	<link rel="icon" href="../assets/img/icon.ico" type="image/x-icon" />
 
 	<!-- Fonts and icons -->
 	<script src="../assets/js/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
-			google: {"families":["Lato:300,400,700,900"]},
-			custom: {"families":["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['../assets/css/fonts.min.css']},
+			google: {
+				"families": ["Lato:300,400,700,900"]
+			},
+			custom: {
+				"families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+				urls: ['../assets/css/fonts.min.css']
+			},
 			active: function() {
 				sessionStorage.fonts = true;
 			}
@@ -25,13 +31,33 @@
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="../assets/css/demo.css">
+	<style>
+		/* .modal-fullscreen {
+			max-width: 100%;
+			height: 100%;
+			margin: 0;
+		}
+
+		.modal-fullscreen .modal-content {
+			height: 100%;
+			border: none;
+			border-radius: 0;
+		}
+
+		.modal-fullscreen .modal-body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		} */
+	</style>
 </head>
+
 <body>
 	<div class="wrapper">
 		<div class="main-header">
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
-				
+
 				<a href="#" class="logo">
 					<img src="../main/img/p.png" width="45" alt="navbar brand" class="navbar-brand">
 				</a>
