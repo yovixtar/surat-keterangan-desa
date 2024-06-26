@@ -1,7 +1,7 @@
 <?php
-    session_start();
-    include 'konek.php';
-    $level = "pemohon";
+session_start();
+include 'konek.php';
+$level = "pemohon";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +34,7 @@
 <!--/head-->
 
 <body id="home" class="homepage">
-   
+
     <header id="header">
         <nav id="main-menu" class="navbar navbar-default navbar-fixed-top" role="banner">
             <div class="container">
@@ -50,7 +50,7 @@
 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="scroll active"><a href="#home">Beranda</a></li>
+                        <li class="scroll"><a href="#home">Beranda</a></li>
                         <li class="scroll"><a href="#features">Jadwal</a></li>
                         <li class="scroll"><a href="#services">Informasi</a></li>
                         <li class="scroll"><a href="login_admin.php">Pegawai</a></li>
@@ -73,8 +73,8 @@
                     <div class="col-lg-12 text-center">
                         <div class="wow fadeInUp" data-wow-duration="300ms" data-wow-delay="200ms"">
                            <!-- Button trigger modal -->
-                           <a href="login.php" type="submit" class="btn btn-primary">Login</a>
-                           <a href="register.php" type="submit" class="btn btn-primary">Daftar</a>
+                           <a href=" login.php" type="submit" class="btn btn-primary">Login</a>
+                            <a href="register.php" type="submit" class="btn btn-primary">Daftar</a>
                         </div>
                     </div>
                 </div>
@@ -210,7 +210,7 @@
 
     <section id="contact">
         <div>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980.257073910635!2d109.37031568537925!3d-6.948514609909529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fc351a0f7d843%3A0x2825bf604af987ed!2sBALAIDESA%20KRAMAT!5e0!3m2!1sid!2sid!4v1708682758665!5m2!1sid!2sid"  width="100%" height="650px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" alt="lokasi kelurahan"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980.257073910635!2d109.37031568537925!3d-6.948514609909529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fc351a0f7d843%3A0x2825bf604af987ed!2sBALAIDESA%20KRAMAT!5e0!3m2!1sid!2sid!4v1708682758665!5m2!1sid!2sid" width="100%" height="650px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0" alt="lokasi kelurahan"></iframe>
         </div>
     </section>
     <!--/#bottom-->
@@ -219,7 +219,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-                    &copy; <?php echo date('Y');?> KANTOR KELURAHAN KRAMAT KECAMATAN PEMALANG KABUPATEN PEMALANG
+                    &copy; <?php echo date('Y'); ?> KANTOR KELURAHAN KRAMAT KECAMATAN PEMALANG KABUPATEN PEMALANG
                 </div>
                 <div class="col-sm-6">
                     <ul class="social-icons">
@@ -247,9 +247,52 @@
     <script src="main/js/main.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <!-- Swal -->
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.15.2/dist/sweetalert2.all.min.js"></script>
-	<!-- Optional: include a polyfill for ES6 Promises for IE11 -->
-	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.15.2/dist/sweetalert2.all.min.js"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Cache selectors
+            var lastId,
+                topMenu = $("#main-menu"),
+                topMenuHeight = topMenu.outerHeight() + 15,
+                // All list items
+                menuItems = topMenu.find("a"),
+                // Anchors corresponding to menu items
+                scrollItems = menuItems.map(function() {
+                    var item = $($(this).attr("href"));
+                    if (item.length) {
+                        return item;
+                    }
+                });
+
+            // Bind to scroll
+            $(window).scroll(function() {
+                // Get container scroll position
+                var fromTop = $(this).scrollTop() + topMenuHeight;
+
+                // Get id of current scroll item
+                var cur = scrollItems.map(function() {
+                    if ($(this).offset().top < fromTop)
+                        return this;
+                });
+                // Get the id of the current element
+                cur = cur[cur.length - 1];
+                var id = cur && cur.length ? cur[0].id : "";
+
+                if (lastId !== id) {
+                    lastId = id;
+                    // Set/remove active class
+                    menuItems
+                        .parent().removeClass("active")
+                        .end().filter("[href='#" + id + "']").parent().addClass("active");
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
