@@ -2,6 +2,16 @@
 <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-2.1.3.min.js"></script>
 <script src="js/sweetalert.min.js"></script>
+<script>
+    function confirmSubmit() {
+        var agree = confirm("Apakah Anda yakin ingin meng-ACC Surat ini?");
+        if (agree) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
 <div class="page-inner">
 	<div class="row">
 		<div class="col-md-12">
@@ -12,7 +22,7 @@
 					</div>
 				</div>
 				<div class="card-body">
-					<form method="POST">
+					<form method="POST" onsubmit="return confirmSubmit();">
 						<div class="table-responsive">
 							<table id="add1" class="display table table-striped table-hover">
 								<thead>
@@ -58,7 +68,7 @@
 											<td><?php echo $keperluan; ?></td>
 											<td>
 
-												<input type="checkbox" name="check[$i]" value="<?php echo $id_request_sktm; ?>">
+												<input type="hidden" name="check[$i]" value="<?php echo $id_request_sktm; ?>">
 												<input type="submit" name="acc" class="btn btn-primary btn-sm" value="ACC">
 												<div class="form-button-action">
 													<a type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Cek Data" href="?halaman=detail_sktm&id_request_sktm=<?= $id_request_sktm; ?>">

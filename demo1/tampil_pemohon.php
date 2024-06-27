@@ -13,6 +13,7 @@
     $telepon = $data['telepon'];
     $agama = $data['agama'];
     $status_warga = $data['status_warga'];
+    $pekerjaan = $data['pekerjaan'];
 
 ?>
 <div class="page-inner">
@@ -71,6 +72,11 @@
                                 <th>STATUS WARGA</th>
                                 <td>:</td>
                                 <td><?= $status_warga;?></td>
+                            </tr>
+                            <tr>
+                                <th>PEKERJAAN</th>
+                                <td>:</td>
+                                <td><?= $pekerjaan;?></td>
                             </tr>
                         </thead>
                     </table>

@@ -19,6 +19,7 @@ if ($hak_akses == "Pemohon") {
 	$alamat = $data['alamat'];
 	$telepon = $data['telepon'];
 	$status_warga = $data['status_warga'];
+	$pekerjaan = $data['pekerjaan'];
 
 	$biodata_kosong = empty($agama) || empty($alamat) || empty($telepon) || empty($status_warga);
 ?>

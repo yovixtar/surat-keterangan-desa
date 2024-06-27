@@ -14,6 +14,7 @@ if (isset($_GET['nik'])) {
 	$alamat = $data['alamat'];
 	$telepon = $data['telepon'];
 	$status_warga = $data['status_warga'];
+	$pekerjaan = $data['pekerjaan'];
 }
 
 ?>
@@ -98,7 +99,10 @@ if (isset($_GET['nik'])) {
 										<option value='Kerja' <?php if ($status_warga == 'Kerja') echo 'selected'; ?>>Kerja</option>
 										<option value='Belum Bekerja' <?php if ($status_warga == 'Belum Bekerja') echo 'selected'; ?>>Belum Bekerja</option>
 									</select>
-
+								</div>
+								<div class="form-group">
+									<label>Pekerjaan</label>
+									<input type="text" name="pekerjaan" class="form-control" value="<?= $pekerjaan; ?>" placeholder="Pekerjaan Anda.. (Kosongkan jika tidak memiliki)">
 								</div>
 							</div>
 						</div>
