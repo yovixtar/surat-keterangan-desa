@@ -36,8 +36,8 @@
 													<input type="date" name="tgl" class="form-control" value=<?= $date;?> required>
 												</div> -->
 												<div class="form-group">
-													<label>Keperluan</label>
-													<input type="text" name="keperluan" class="form-control" placeholder="Keperluan Anda.." autofocus>
+													<label>Keterangan Tambahan</label>
+													<input type="text" name="keperluan" class="form-control" placeholder="Keterangan Tambahan.." autofocus>
 												</div>
 											</div>
 											<div class="col-md-6 col-lg-6">		

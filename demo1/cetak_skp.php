@@ -53,7 +53,6 @@ function tgl_indo($tanggal)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CETAK SKP</title>
 
-    
     <!-- Fonts and icons -->
     <script src="../assets/js/plugin/webfont/webfont.min.js"></script>
     <script>
