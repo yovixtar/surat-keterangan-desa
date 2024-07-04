@@ -1,5 +1,4 @@
 <?php include '../konek.php'; ?>
-<?php include '../konek.php'; ?>
 <?php
 if (isset($_GET['id_request_sktm'])) {
     $id = $_GET['id_request_sktm'];

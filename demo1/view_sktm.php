@@ -147,9 +147,9 @@ if (isset($_GET['id_request_sktm'])) {
 
                         <!-- Bagian Tanda Tangan -->
                         <div class="row mt-5">
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4"></div>
-                            <div class="col-md-4">
+                            <div class="col-4"></div>
+                            <div class="col-4"></div>
+                            <div class="col-4">
                                 <table style="font-size: 12pt; width: 100%; border-spacing: 0;">
                                     <tr>
                                         <td style="text-align: center;">Pemalang, <?= $acc; ?></td>

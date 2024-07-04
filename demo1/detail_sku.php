@@ -23,6 +23,8 @@
 		$kk = $data['scan_kk'];
 		$keperluan = $data['keperluan'];
 		$usaha = $data['usaha'];
+		$lokasi = $data['lokasi'];
+		$lama_usaha = $data['lama_usaha'];
 		$keterangan = $data['keterangan'];
 	}
 ?>
@@ -100,10 +102,18 @@
 															<option value="Kerja" <?php if($status_warga=="Kerja") echo 'selected'?>>Kerja</option>
 															<option value="Bekerja" <?php if($status_warga=="Bekerja") echo 'selected'?>>Belum Bekerja</option>
 														</select>
-													</div>			
+													</div>
 													<div class="form-group">
 														<label>Usaha</label>
 														<input type="text" name="telepon" value="<?php echo $usaha;?>" class="form-control" placeholder="Telepon Anda.." readonly="">
+													</div>
+													<div class="form-group">
+														<label>Lokasi</label>
+														<input type="text" name="lokasi" value="<?php echo $lokasi;?>" class="form-control" placeholder="Loaksi Usaha Anda.." readonly="">
+													</div>
+													<div class="form-group">
+														<label>Lama Usaha</label>
+														<input type="number" name="lama_usaha" value="<?php echo $lama_usaha;?>" class="form-control" placeholder="Telepon Anda.." readonly="">
 													</div>
 													<div class="form-group">
 														<label>Keperluan</label>

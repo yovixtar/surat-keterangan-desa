@@ -12,6 +12,8 @@ if(isset($_GET['id_request_sku'])){
 	$nik = $data['nik'];
     $nama = $data['nama'];
     $usaha = $data['usaha'];
+    $lokasi = $data['lokasi'];
+    $lama_usaha = $data['lama_usaha'];
     $keperluan = $data['keperluan'];
     $ktp = $data['scan_ktp'];
     $kk = $data['scan_kk'];
@@ -36,10 +38,18 @@ if(isset($_GET['id_request_sku'])){
 													<label>Usaha</label>
 													<input type="text" name="usaha" class="form-control" value="<?= $usaha;?>" placeholder="Usaha Anda.." autofocus>
 												</div>
-												<div class="form-group">
-													<label>Keperluan</label>
-													<input type="text" name="keperluan" class="form-control" value="<?= $keperluan;?>" placeholder="Keperluan Anda..">
-												</div>
+								<div class="form-group">
+									<label>Lokasi Usaha</label>
+									<input type="text" name="lokasi" class="form-control" value="<?= $lokasi ?>" placeholder="Lokasi usaha Anda.." autofocus>
+								</div>
+								<div class="form-group">
+									<label>Lama Usaha (Bulan)</label>
+									<input type="number" name="lama-usaha" class="form-control" value="<?= $lama_usaha ?>" placeholder="Berapa bulan usaha Anda telah berjalan dalam bulan.." autofocus>
+								</div>
+								<div class="form-group">
+									<label>Keterangan Tambahan</label>
+									<input type="text" name="keperluan" class="form-control" value="<?= $keperluan;?>" placeholder="Keperluan / Keterangan Tambahan Anda.." autofocus>
+								</div>
 											</div>
 											<div class="col-md-6 col-lg-6">	
                                                 <div class="form-group">
@@ -72,6 +82,8 @@ if(isset($_GET['id_request_sku'])){
 <?php
 if(isset($_POST['ubah'])){
 	$usaha = $_POST['usaha'];
+	$lokasi = $_POST['lokasi'];
+	$lama_usaha = $_POST['lama-usaha'];
     $keperluan = $_POST['keperluan'];
 	$nama_ktp = isset($_FILES['ktp']);
 	$file_ktp = $_POST['nik']."_".".jpg";
@@ -80,6 +92,8 @@ if(isset($_POST['ubah'])){
     $sql = "UPDATE data_request_sku SET
     usaha='$usaha',
     keperluan='$keperluan',
+    lokasi='$lokasi',
+    lama_usaha='$lama_usaha',
     scan_ktp='$file_ktp',
     scan_kk='$file_kk' WHERE id_request_sku=$id";
 	$query = mysqli_query($konek,$sql);

@@ -1,300 +1,200 @@
-<?php include '../konek.php';?>
+<?php include '../konek.php'; ?>
 <link href="css/sweetalert.css" rel="stylesheet" type="text/css">
 <script src="js/jquery-2.1.3.min.js"></script>
-<script src="js/sweetalert.min.js"></script> 
-<?php
-	if(isset($_GET['id_request_sku'])){
-		$id=$_GET['id_request_sku'];
-		$sql = "SELECT * FROM data_request_sku natural join data_user WHERE id_request_sku='$id'";
-		$query = mysqli_query($konek,$sql);
-        $data = mysqli_fetch_array($query,MYSQLI_BOTH);
-        $id=$data['id_request_sku'];
-        $nik = $data['nik'];
-		$nama = $data['nama'];
-		$tempat = $data['tempat_lahir'];
-        $tgl = $data['tanggal_lahir'];
-        $tgl2 = $data['tanggal_request'];
-        $format1 = date('Y', strtotime($tgl2));
-        $format2 = date('d-m-Y', strtotime($tgl));
-        $format3 = date('d F Y', strtotime($tgl2));
-		$agama = $data['agama'];
-		$jekel = $data['jekel'];
-		$nama = $data['nama'];
-		$alamat = $data['alamat'];
-        $status_warga = $data['status_warga'];
-        $keperluan = $data['keperluan'];
-        $request = $data['request'];
-        $usaha = $data['usaha'];
-        $acc = $data['acc'];
-        $format4 = date('d F Y', strtotime($acc));
-        if($acc==0){
-            $acc="BELUM TTD";
-        }elseif($acc==1){
-           $acc;
+<script src="js/sweetalert.min.js"></script>
+<script>
+    function confirmSubmit() {
+        var agree = confirm("Apakah Anda yakin ingin mengirimkan form ini ? \nSetelah dikirim, form tidak bisa dicetak.");
+        if (agree) {
+            return true;
+        } else {
+            return false;
         }
-	}
+    }
+</script>
+<?php
+if (isset($_GET['id_request_sku'])) {
+    $id = $_GET['id_request_sku'];
+    $sql = "SELECT * FROM data_request_sku natural join data_user WHERE id_request_sku='$id'";
+    $query = mysqli_query($konek, $sql);
+    $data = mysqli_fetch_array($query, MYSQLI_BOTH);
+    $id = $data['id_request_sku'];
+    $nik = $data['nik'];
+    $nama = $data['nama'];
+    $tempat = $data['tempat_lahir'];
+    $tgl = $data['tanggal_lahir'];
+    $tgl2 = $data['tanggal_request'];
+    $format1 = date('Y', strtotime($tgl2));
+    $format2 = date('d-m-Y', strtotime($tgl));
+    $format3 = date('d F Y', strtotime($tgl2));
+    $agama = $data['agama'];
+    $jekel = $data['jekel'];
+    $nama = $data['nama'];
+    $alamat = $data['alamat'];
+    $status_warga = $data['status_warga'];
+    $keperluan = $data['keperluan'];
+    $lokasi = $data['lokasi'];
+    $lama_usaha = $data['lama_usaha'];
+    $request = $data['request'];
+    $usaha = $data['usaha'];
+    $acc = $data['acc'];
+    $format4 = date('d F Y', strtotime($acc));
+    if ($acc == 0) {
+        $acc = "BELUM TTD";
+    } elseif ($acc == 1) {
+        $acc;
+    }
+}
 ?>
- <div class="panel-header bg-primary-gradient">
-					<div class="page-inner py-5">
-						<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
-							<div>
-								<h2 class="text-white pb-2 fw-bold"></h2>
-							</div>
-						</div>
-					</div>
+<div class="panel-header bg-primary-gradient">
+    <div class="page-inner py-5">
+        <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row">
+            <div>
+                <h2 class="text-white pb-2 fw-bold"></h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-inner mt--5">
+    <div class="row mt--2">
+        <div class="col-md-6">
+            <div class="card full-height">
+                <div class="card-body">
+                    <div class="card-tools">
+                        <form action="" method="POST">
+                            <div class="form-group">
+                                <input type="date" name="tgl_acc" class="form-control">
+                                <div class="form-group">
+                                    <input type="submit" name="ttd" value="ACC" class="btn btn-primary btn-sm">
+                                </div>
+                            </div>
+                        </form>
+                        <?php
+                        if (isset($_POST['ttd'])) {
+                            $ket = "Surat sedang dalam proses cetak";
+                            $tgl = $_POST['tgl_acc'];
+                            $update = mysqli_query($konek, "UPDATE data_request_sku SET acc='$tgl', status=2, keterangan='$ket' WHERE id_request_sku=$id");
+                            if ($update) {
+                                echo "<script language='javascript'>swal('Selamat...', 'ACC Lurah Berhasil', 'success');</script>";
+                                echo '<meta http-equiv="refresh" content="3; url=?halaman=belum_acc_sku">';
+                            } else {
+                                echo "<script language='javascript'>swal('Gagal...', 'ACC Lurah Gagal', 'error');</script>";
+                                echo '<meta http-equiv="refresh" content="3; url=?halaman=view_sku">';
+                            }
+                        }
+                        ?>
+                    </div>
                 </div>
-                <div class="page-inner mt--5">
-					<div class="row mt--2">
-						<div class="col-md-6">
-							<div class="card full-height">
-								<div class="card-body">
-								    <div class="card-tools">
-                                        <form action="" method="POST">
-                                            <div class="form-group">
-                                                <input type="date" name="tgl_acc" class="form-control">
-                                                <div class="form-group">
-                                                    <input type="submit" name="ttd" value="ACC" class="btn btn-primary btn-sm">
-                                                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card" style="padding-left: 3cm; padding-right: 3cm;">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <!-- Gambar Header -->
+                                        <img src="img/pml.png" style="width: 2cm;" class="my-3" alt="Logo">
+
+                                        <!-- Teks Header -->
+                                        <h5 class="font-weight-bold" style="font-size: 14pt; margin-bottom: 0;">PEMERINTAH KABUPATEN PEMALANG</h5>
+                                        <h4 class="font-weight-bold" style="font-size: 16pt; margin-bottom: 0;">KECAMATAN PEMALANG</h4>
+                                        <h3 class="font-weight-bold" style="font-size: 18pt; margin-bottom: 0;">DESA KRAMAT</h3>
+
+                                        <!-- Spasi -->
+                                        <br><br>
+
+                                        <!-- Judul Surat -->
+                                        <h3 class="font-weight-bold text-decoration-underline" style="margin-bottom: 0;text-decoration: underline;text-decoration-thickness: 3px;">SURAT KETERANGAN USAHA</h3>
+                                        <p style="margin-top: 0;">Nomor : 045.11/ 227 / Kramat</p>
+                                    </div>
+
+                                    <!-- Konten Surat -->
+                                    <div class="mt-5" style="font-size: 12pt;">
+                                        <p style="text-indent: 1cm;font-size: 12pt;">Menerangkan bahwa :</p>
+
+                                        <!-- Tabel Informasi Penanda Tangan -->
+                                        <table style="font-size: 12pt; width: 100%; border-spacing: 0;">
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Nama</td>
+                                                <td style="width: 70%;">: <?= $nama; ?></td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Tempat, Tgl Lahir</td>
+                                                <td style="width: 70%;">: <?= $tempat . ", " . tgl_indo($tgl); ?></td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Alamat</td>
+                                                <td style="width: 70%;">: <?= $alamat; ?></td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">NIK</td>
+                                                <td style="width: 70%;">: <?= $nik; ?></td>
+                                            </tr>
+                                        </table>
+
+                                        <p style="text-indent: 1cm;font-size: 12pt;" class="mt-3">Bahwa Benar – benar mempunyai :</p>
+
+                                        <!-- Tabel Informasi Penduduk -->
+                                        <table style="font-size: 12pt; width: 100%; border-spacing: 0;">
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Usaha</td>
+                                                <td style="width: 70%;">: <?= $usaha; ?></td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Lokasi</td>
+                                                <td style="width: 70%;">: <?= $lokasi; ?></td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Lama Usaha</td>
+                                                <td style="width: 70%;">: <?= $lama_usaha; ?> Bulan</td>
+                                            </tr>
+                                            <tr style="height: 1.2em;">
+                                                <td style="width: 30%;">Keterangan Lain</td>
+                                                <td style="width: 70%;">: <?= $keperluan; ?></td>
+                                            </tr>
+                                        </table>
+
+                                        <p style="text-indent: 1cm;font-size: 12pt;" class="mt-3">Demikian Surat Keterangan Usaha ini dibuat untuk dapat dipergunakan seperlunya.</p>
+
+                                        <!-- Bagian Tanda Tangan -->
+                                        <div class="row mt-5">
+                                            <div class="col-4"></div>
+                                            <div class="col-4"></div>
+                                            <div class="col-4">
+                                                <table style="font-size: 12pt; width: 100%; border-spacing: 0;">
+                                                    <tr>
+                                                        <td style="text-align: center;">Pemalang, <?= $acc; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: center;">KEPALA DESA KRAMAT</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height: 4em;"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: center; font-style: italic;">RAHAYU</td>
+                                                    </tr>
+                                                </table>
                                             </div>
-                                        </form>
-                                        <?php
-                                        if(isset($_POST['ttd'])){
-                                            $ket="Surat sedang dalam proses cetak";
-                                            $tgl = $_POST['tgl_acc'];
-                                            $update = mysqli_query($konek,"UPDATE data_request_sku SET acc='$tgl', status=2, keterangan='$ket' WHERE id_request_sku=$id");
-                                            if($update){
-                                                echo "<script language='javascript'>swal('Selamat...', 'ACC Lurah Berhasil', 'success');</script>" ;
-                                                echo '<meta http-equiv="refresh" content="3; url=?halaman=belum_acc_sku">';
-                                            }else{
-                                                echo "<script language='javascript'>swal('Gagal...', 'ACC Lurah Gagal', 'error');</script>" ;
-                                                echo '<meta http-equiv="refresh" content="3; url=?halaman=view_sku">';
-                                            }
 
-                                        }
-                                        ?>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="card">
-								<div class="card-body">
-                                <table border="1" align="center">
-                                <table border="0" align="center">
-        <tr>
-        <td><img src="img/pml.png" width="70" height="87" alt=""></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-            <td>
-                <center>
-                    <font size="4">PEMERINTAHAN KABUPATEN PEMALANG</font><br>
-                    <font size="4">KECAMATAN PEMALANG</font><br>
-                    <font size="5"><b>KELURAHAN KRAMAT</b></font><br>
-                    <font size="2"><i>JL. MERAK No.9 Kramat 52318</i></font><br>
-                </center>
-            </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        </tr>
-        <tr>
-            <td colspan="45"><hr color="black"></td>
-        </tr>
-    </table>
-    <br>
-    <table border="0" align="center">
-        <tr>
-            <td>
-                <center>
-                    <font size="4"><b>SURAT KETERANGAN / PENGANTAR</b></font><br>
-                    <hr style="margin:0px" color="black">
-                    <span>Nomor : 045.2 / <?php echo $id;?> / 29.07.05</span>
-                </center>
-            </td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <table border="0" align="center">
-        <tr>
-            <td>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yang bertanda tangan di bawah ini Lurah Kramat Kabupaten Kota <br> Pemalang, Menerangkan bahwa :
-            </td>
-        </tr>
-    </table>
-    <br>
-    <table border="0" align="center">
-        <tr>
-            <td>Nama</td>
-            <td>:</td>
-            <td><?php echo $nama;?></td>
-        </tr>
-        <tr>
-            <td>TTL</td>
-            <td>:</td>
-            <td><?php echo $tempat.", ".$format2;?></td>
-        </tr>
-        <tr>
-            <td>Jenis Kelamin</td>
-            <td>:</td>
-            <td><?php echo $jekel;?></td>
-        </tr>
-        <tr>
-            <td>Agama</td>
-            <td>:</td>
-            <td><?php echo $agama;?></td>
-        </tr>
-        <tr>
-            <td>Status Warga</td>
-            <td>:</td>
-            <td><?php echo $status_warga;?></td>
-        </tr>
-        <tr>
-            <td>No. NIK</td>
-            <td>:</td>
-            <td><?php echo $nik;?></td>
-        </tr>
-        <tr>
-            <td>Alamat</td>
-            <td>:</td>
-            <td><?php echo $alamat;?></td>
-        </tr>
-        <tr>
-            <td>Usaha</td>
-            <td>:</td>
-            <td><?php echo $usaha;?></td>
-        </tr>
-        <tr>
-            <td>Keperluan</td>
-            <td>:</td>
-            <td><?php echo $keperluan;?></td>
-        </tr>
-        <tr>
-            <td>Request</td>
-            <td>:</td>
-            <?php
-                if($request=="USAHA"){
-                    $request="Surat Keterangan Usaha";
-                }
-            ?>
-            <td><?php echo $request;?></td>
-        </tr>
-    </table>
-    <br>
-    <table border="0" align="center">
-        <tr>
-            <td>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian surat ini diberikan kepada yang bersangkutan agar dapat dipergunakan<br>&nbsp;&nbsp;&nbsp;&nbsp;untuk sebagaimana mestinya.
-            </td>
-        </tr>
-    </table>
-    <br>
-    <br>
-    <table border="0" align="center">
-        <tr>
-            <th></th>
-            <th width="100px"></th>
-            <th>Pemalang, <?php echo $acc;?></th>
-        </tr>
-        <tr>
-            <td>Tanda tangan <br> Yang bersangkutan </td>
-            <td></td>
-            <td>Lurah Kramat</td>
-        </tr>
-        <tr>
-            <td rowspan="15"></td>
-            <td></td>
-            <td rowspan="15"></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td></td>
-        </tr><tr>
-            <td></td>
-        </tr><tr>
-            <td></td>
-        </tr><tr>
-            <td></td>
-        </tr>
-        <tr>
-            <td><b style="text-transform:uppercase"><u>(<?php echo $nama;?>)</u></b></td>
-            <td></td>
-            <td><b><u>(RAHAYU)</u></b></td>
-        </tr>
-    </table>
-                                
-                                </table>
+                                        </div>
 
-								</div>
-							</div>
-						</div>
-					</div>
-			</div>
+                                        <!-- Alamat -->
+                                        <p style="text-align: center; font-style: italic; font-size: 12pt;" class="mt-5">Jalan Merak No.01, Desa Kramat, Kec./Kab. Pemalang 52318</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
