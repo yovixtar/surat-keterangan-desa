@@ -73,7 +73,7 @@ if (isset($_GET['id_request_sktm'])) {
                                 </select><br>
                                 <!-- <input type="date" name="tgl_acc" class="form-control"> -->
                                 <input type="submit" name="ttd" value="Kirim" class="btn btn-primary btn-sm">
-                                <a href="cetak_sktm.php?id_request_sktm=<?= $id; ?>" class="btn btn-primary btn-sm">Cetak</a>
+                                <a href="cetak_sktm.php?id_request_sktm=<?= $id; ?>" target="BLANK" class="btn btn-primary btn-sm">Cetak</a>
                                 <!-- <div class="form-group">
                                                     <a href="cetak_skd.php?id_request_skd=<?php $id; ?>">
                                                         Cetak
@@ -186,7 +186,7 @@ if (isset($_GET['id_request_sktm'])) {
                                         <td style="height: 4em;"></td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: center; font-style: italic;">RAHAYU</td>
+                                        <td style="text-align: center;">RAHAYU</td>
                                     </tr>
                                 </table>
                             </div>

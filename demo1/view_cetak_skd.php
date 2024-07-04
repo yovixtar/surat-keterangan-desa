@@ -63,7 +63,7 @@
                                                 </select><br>
                                                 <!-- <input type="date" name="tgl_acc" class="form-control"> -->
                                                     <input type="submit" name="ttd" value="Kirim" class="btn btn-primary btn-sm">
-                                                    <a href="cetak_skd.php?id_request_skd=<?=$id;?>" class="btn btn-primary btn-sm">Cetak</a>
+                                                    <a href="cetak_skd.php?id_request_skd=<?=$id;?>" target="BLANK" class="btn btn-primary btn-sm">Cetak</a>
                                                 <!-- <div class="form-group">
                                                     <a href="cetak_skd.php?id_request_skd=<?php $id;?>">
                                                         Cetak

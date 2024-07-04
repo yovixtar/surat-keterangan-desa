@@ -161,7 +161,7 @@ if (isset($_GET['id_request_sktm'])) {
                                         <td style="height: 4em;"></td>
                                     </tr>
                                     <tr>
-                                        <td style="text-align: center; font-style: italic;">RAHAYU</td>
+                                        <td style="text-align: center;">RAHAYU</td>
                                     </tr>
                                 </table>
                             </div>
